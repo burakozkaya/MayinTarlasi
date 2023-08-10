@@ -23,11 +23,6 @@
             this.Size = new Size(600, 400);
             TableMaker(count2);
         }
-
-
-
-
-
         private void BombCheck(object? sender, MouseEventArgs e)
         {
             Button btn = sender as Button;
@@ -102,13 +97,30 @@
 
         private void btnBaslat_Click(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
-            timer1.Start();
-            count = int.Parse(txtSure.Text);
-            int tempBomb = int.Parse(txtMayin.Text);
-            int temp = 10;
-            LabelSetter();
-            BombMaker(tempBomb, temp);
+            bool flag1, flag2;
+            string tempX = "";
+            flag2 = int.TryParse(txtSure.Text, out count);
+            flag1 = int.TryParse(txtMayin.Text, out int tempBomb);
+            if (flag1 && flag2 && count > 30)
+            {
+                int temp = 10;
+                timer1.Enabled = true;
+                timer1.Start();
+                LabelSetter();
+                BombMaker(tempBomb, temp);
+
+            }
+            else
+            {
+                if (!flag1)
+                    tempX += "Mayın alanını doğru giriniz. ";
+                if (!flag2)
+                    tempX += "Sürenin doğru girildiğinden emin olunuz. ";
+                if (count < 30 && flag2)
+                    tempX += "Süre 30 saniyeden az olamaz.";
+                MessageBox.Show(tempX);
+                return;
+            }
 
         }
 
@@ -145,10 +157,10 @@
                 {
                     if (!dic.ContainsKey((i, j)))
                         dicN.Add((i, j), "neutral");
-                      else
+                    else
                         buttons[i, j].Text = "bomb";
 
-                     buttons[i, j].Enabled = true;
+                    buttons[i, j].Enabled = true;
 
                 }
 
