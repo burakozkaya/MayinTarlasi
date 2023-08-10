@@ -1,4 +1,6 @@
-﻿namespace MayinTarlasi
+﻿using System.Windows.Forms;
+
+namespace MayinTarlasi
 {
     public partial class Form1 : Form
     {
@@ -62,6 +64,7 @@
             {
                 dicN.Remove((x, y));
                 buttons[x, y].Enabled = false;
+                btn.Focus();
                 buttons[x, y].BackColor = Color.Green;
                 if (dicN.Count == 0)
                 {
@@ -112,8 +115,12 @@
             flag1 = int.TryParse(txtMayin.Text, out tempBomb);
             if (flag1 && flag2 && count >= 30)
             {
+                countTemp = count;
                 RestartGame();
-
+                btnBaslat.TabStop = false;
+                btnYeni.TabStop = false;
+                btnYardım.TabStop = false;
+                btnRestart.TabStop = false;
             }
             else
             {
@@ -168,7 +175,7 @@
                 item.BackColor = Color.White;
                 item.Enabled = true;
             }
-            countTemp = count;
+            count = countTemp;
             btnBaslat.Enabled = false;
             txtMayin.Enabled = false;
             txtSure.Enabled = false;
@@ -182,15 +189,15 @@
         //Form ayarlarını yapan metot
         private void FormSettings()
         {
-            txtMayin.TabStop = false;
-            txtSure.TabStop = false;
+            txtMayin.TabIndex = 0;
+            txtSure.TabIndex = 1;
+            btnBaslat.TabIndex = 2;
+            btnYeni.TabIndex = 3;
+            btnRestart.TabIndex = 4;
+            btnYardım.TabIndex = 5;
             label1.Enabled = false;
             label2.Enabled = false;
-            btnYardım.TabStop = false;
             btnRestart.Enabled = false;
-            btnRestart.TabStop = false;
-            btnBaslat.TabStop = false;
-            btnYeni.TabStop = false;
             this.Name = tempName;
             this.Text = tempName;
             this.Size = new Size(500, 345);
@@ -287,6 +294,18 @@
             }
         }
 
+        private void btnBaslat_KeyPress(object sender, KeyPressEventArgs e)
+        {
 
+        }
+
+        private void btnBaslat_KeyDown(object sender, KeyEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn.Select();
+            }
+        }
     }
 }

@@ -77,6 +77,8 @@
             btnBaslat.Text = "Başlat";
             btnBaslat.UseVisualStyleBackColor = true;
             btnBaslat.Click += btnBaslat_Click;
+            btnBaslat.KeyDown += btnBaslat_KeyDown;
+            btnBaslat.KeyPress += btnBaslat_KeyPress;
             // 
             // txtMayin
             // 
@@ -108,6 +110,7 @@
             btnYeni.Text = "Yeni Oyun";
             btnYeni.UseVisualStyleBackColor = true;
             btnYeni.Click += btnYeni_Click;
+            btnYeni.KeyDown += btnBaslat_KeyDown;
             // 
             // btnRestart
             // 
@@ -118,6 +121,7 @@
             btnRestart.Text = "Restart";
             btnRestart.UseVisualStyleBackColor = true;
             btnRestart.Click += btnRestart_Click;
+            btnRestart.KeyDown += btnBaslat_KeyDown;
             // 
             // btnYardım
             // 
@@ -128,6 +132,7 @@
             btnYardım.Text = "Yardım";
             btnYardım.UseVisualStyleBackColor = true;
             btnYardım.Click += btnYardım_Click;
+            btnYardım.KeyDown += btnBaslat_KeyDown;
             // 
             // Form1
             // 
