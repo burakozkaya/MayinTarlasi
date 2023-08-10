@@ -29,6 +29,7 @@ namespace MayinTarlasi
         }
         private void BombCheck(object? sender, MouseEventArgs e)
         {
+            timer1.Start();
             Button btn = sender as Button;
             x = 1;
             y = 1;
@@ -46,7 +47,7 @@ namespace MayinTarlasi
             temp = (x, y);
             if (dicBomb.ContainsKey(temp))
             {
-                MessageBox.Show("Oynu kaybettiniz.");
+                MessageBox.Show("Bombaya tıklandı\nOynu kaybettiniz.");
                 timer1.Stop();
                 timer2.Enabled = true;
                 timer2.Start();
@@ -102,7 +103,7 @@ namespace MayinTarlasi
                     item.Enabled = false;
                 }
                 timer1.Stop();
-                MessageBox.Show("Süreniz dolmuştur");
+                MessageBox.Show("Süreniz dolduğu için kaybettiniz!");
                 DialogRes();
             }
         }
@@ -111,9 +112,9 @@ namespace MayinTarlasi
 
             bool flag1, flag2;
             string tempX = "";
-            flag2 = int.TryParse(txtSure.Text, out count);
             flag1 = int.TryParse(txtMayin.Text, out tempBomb);
-            if (flag1 && flag2 && count >= 30)
+            flag2 = int.TryParse(txtSure.Text, out count);
+            if (flag1 && flag2 && count >= 30&& tempBomb > 0)
             {
                 countTemp = count;
                 RestartGame();
@@ -126,6 +127,8 @@ namespace MayinTarlasi
             {
                 if (!flag1)
                     tempX += "Mayın alanını doğru giriniz. ";
+                if (flag1 && tempBomb < 0)
+                    tempX += "Mayın alanı 0 veya 0'dan küçük olamaz. ";
                 if (!flag2)
                     tempX += "Sürenin doğru girildiğinden emin olunuz. ";
                 if (count < 30 && flag2)
@@ -180,8 +183,10 @@ namespace MayinTarlasi
             txtMayin.Enabled = false;
             txtSure.Enabled = false;
             int temp = 10;
-            timer1.Enabled = true;
-            timer1.Start();
+            //timer1.Enabled = true;
+            timer1.Stop();
+            timer2.Stop();
+            count2 = 10;
             LabelSetter();
             BombMaker(tempBomb, temp);
             btnRestart.Enabled = true;
