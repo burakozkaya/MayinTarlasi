@@ -19,9 +19,9 @@
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Name = "Mayın Tarlası";
-            LabelSetter();
             this.AutoSize = false;
             this.Size = new Size(600, 400);
+            TableMaker(count2);
         }
 
 
@@ -51,30 +51,35 @@
                 timer2.Enabled = true;
                 timer2.Start();
             }
-            dicN.Remove((x, y));
-            buttons[x, y].Enabled = false;
-            buttons[x, y].BackColor = Color.Green;
-            if (dicN.Count == 0)
+            else
             {
-                MessageBox.Show("Tebrikler Oynu kazandınız");
-                DialogRes();
-            }
-
-            int count = 0;
-            for (int i = -1; i <= 1; i++)
-            {
-                for (int j = -1; j <= 1; j++)
+                dicN.Remove((x, y));
+                buttons[x, y].Enabled = false;
+                buttons[x, y].BackColor = Color.Green;
+                if (dicN.Count == 0)
                 {
-                    if (i == 0 && j == 0)
-                        continue;
-                    if (dic.ContainsKey((x + i, y + j)))
-                    {
-                        count++;
-                    }
-
+                    MessageBox.Show("Tebrikler Oynu kazandınız");
+                    DialogRes();
                 }
+
+                int count = 0;
+                for (int i = -1; i <= 1; i++)
+                {
+                    for (int j = -1; j <= 1; j++)
+                    {
+                        if (i == 0 && j == 0)
+                            continue;
+                        if (dic.ContainsKey((x + i, y + j)))
+                        {
+                            count++;
+                        }
+
+                    }
+                }
+                btn.Text = count.ToString();
+
             }
-            btn.Text = count.ToString();
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -93,6 +98,31 @@
             }
         }
 
+
+
+        private void btnBaslat_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
+            timer1.Start();
+            count = int.Parse(txtSure.Text);
+            int tempBomb = int.Parse(txtMayin.Text);
+            int temp = 10;
+            LabelSetter();
+            BombMaker(tempBomb, temp);
+
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            count2--;
+            if (count2 == 0)
+            {
+
+                timer2.Stop();
+                MessageBox.Show("Oynu kaybettiniz.");
+                DialogRes();
+            }
+        }
         private void LabelSetter()
         {
             string tempSaniye = count % 60 < 10 ? "0" + (count % 60).ToString() : (count % 60).ToString();
@@ -110,6 +140,18 @@
                 else
                     i--;
             }
+            for (int i = 0; i < x; i++)
+                for (int j = 0; j < x; j++)
+                {
+                    if (!dic.ContainsKey((i, j)))
+                        dicN.Add((i, j), "neutral");
+                      else
+                        buttons[i, j].Text = "bomb";
+
+                     buttons[i, j].Enabled = true;
+
+                }
+
         }
         private void TableMaker(int temp)
         {
@@ -129,12 +171,9 @@
 
                     };
 
-                    //if (dic.ContainsKey((i, j)))
-                    //    buttons[i, j].Text = "bomb";
-                    if (!dic.ContainsKey((i, j)))
-                        dicN.Add((i, j), "neutral");
                     x += 31;
                     buttons[i, j].TabStop = false;
+                    buttons[i, j].Enabled = false;
 
 
                     this.Controls.Add(buttons[i, j]);
@@ -158,30 +197,6 @@
             {
                 MessageBox.Show("Uygulama sonlandırıldı");
                 Application.Exit();
-            }
-        }
-
-        private void btnBaslat_Click(object sender, EventArgs e)
-        {
-            timer1.Enabled = true;
-            timer1.Start();
-            count = int.Parse(txtSure.Text);
-            int tempBomb = int.Parse(txtMayin.Text);
-            int temp = 10;
-            BombMaker(tempBomb, temp);
-            TableMaker(temp);
-
-        }
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            count2--;
-            if(count2 == 0)
-            {
-
-                timer2.Stop();
-                MessageBox.Show("Oynu kaybettiniz.");
-                DialogRes();
             }
         }
     }
