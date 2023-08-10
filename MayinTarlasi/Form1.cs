@@ -7,33 +7,30 @@
 
             InitializeComponent();
         }
+
         Dictionary<(int, int), Button> dicBomb = new Dictionary<(int, int), Button>();
+
         Dictionary<(int, int), string> dicN = new Dictionary<(int, int), string>();
-        DialogResult tekrarOyna;
-        DialogResult ayniAyar;
-        DialogResult yeniOyun;
+
+        DialogResult tekrarOyna, ayniAyar, yeniOyun;
+
         string tempName = "Mayın Tarlası";
 
         (int, int) temp;
-        int count;
-        int countTemp;
-        int tempBomb;
-        int count2 = 10;
+        int count, countTemp, tempBomb, count2 = 10, x, y;
 
         Button[,] buttons = new Button[10, 10];
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Name = tempName;
-            this.Text = tempName;
-            this.Size = new Size(500, 345);
-            this.AutoSize = false;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormSettings();
             TableMaker(count2);
         }
+
+
+
         private void BombCheck(object? sender, MouseEventArgs e)
         {
             Button btn = sender as Button;
-            int x, y;
             x = 1;
             y = 1;
             for (int i = 0; i < 10; i++)
@@ -119,17 +116,9 @@
             string tempX = "";
             flag2 = int.TryParse(txtSure.Text, out count);
             flag1 = int.TryParse(txtMayin.Text, out tempBomb);
-            if (flag1 && flag2 && count > 30)
+            if (flag1 && flag2 && count >= 30)
             {
-                countTemp = count;
-                btnBaslat.Enabled = false;
-                txtMayin.Enabled = false;
-                txtSure.Enabled = false;
-                int temp = 10;
-                timer1.Enabled = true;
-                timer1.Start();
-                LabelSetter();
-                BombMaker(tempBomb, temp);
+                Restart();
 
             }
             else
@@ -146,12 +135,13 @@
 
         }
 
+
+
         private void timer2_Tick(object sender, EventArgs e)
         {
             count2--;
             if (count2 == 0)
             {
-
                 timer2.Stop();
                 MessageBox.Show("Oynu kaybettiniz.");
                 DialogRes();
@@ -193,9 +183,8 @@
         }
         private void TableMaker(int temp)
         {
-
-            int x = 5;
-            int y = 0;
+            x = 5;
+            y = 0;
             for (int i = 0; i < temp; i++)
             {
                 for (int j = 0; j < temp; j++)
@@ -263,11 +252,55 @@
         private void btnYeni_Click(object sender, EventArgs e)
         {
             yeniOyun = MessageBox.Show("Yeni bir oyun oluşturmak istediğinizden emin misiniz ?", tempName, MessageBoxButtons.YesNo);
-            if(yeniOyun == DialogResult.Yes)
+            if (yeniOyun == DialogResult.Yes)
             {
                 Application.Restart();
                 Environment.Exit(0);
             }
+        }
+
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            Restart();
+        }
+        private void Restart()
+        {
+            countTemp = count;
+            btnBaslat.Enabled = false;
+            txtMayin.Enabled = false;
+            txtSure.Enabled = false;
+            int temp = 10;
+            timer1.Enabled = true;
+            timer1.Start();
+            LabelSetter();
+            BombMaker(tempBomb, temp);
+            btnRestart.Enabled = true;
+        }
+        private void FormSettings()
+        {
+            txtMayin.TabStop = false;
+            txtSure.TabStop = false;
+            label1.Enabled = false;
+            label2.Enabled = false;
+            btnRestart.Enabled = false;
+            btnRestart.TabStop = false;
+            btnBaslat.TabStop = false;
+            btnYeni.TabStop = false;
+            this.Name = tempName;
+            this.Text = tempName;
+            this.Size = new Size(500, 345);
+            this.AutoSize = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -37,6 +37,7 @@
             txtSure = new TextBox();
             timer2 = new System.Windows.Forms.Timer(components);
             btnYeni = new Button();
+            btnRestart = new Button();
             SuspendLayout();
             // 
             // timer1
@@ -47,20 +48,26 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(420, 50);
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(428, 30);
             label1.Name = "label1";
-            label1.Size = new Size(19, 15);
+            label1.Size = new Size(15, 17);
             label1.TabIndex = 0;
-            label1.Text = "00";
+            label1.Text = "0";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            label1.Click += label1_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(349, 50);
+            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(349, 30);
             label2.Name = "label2";
-            label2.Size = new Size(65, 15);
+            label2.Size = new Size(73, 17);
             label2.TabIndex = 1;
             label2.Text = "Kalan Süre:";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            label2.Click += label2_Click;
             // 
             // btnBaslat
             // 
@@ -103,11 +110,22 @@
             btnYeni.UseVisualStyleBackColor = true;
             btnYeni.Click += btnYeni_Click;
             // 
+            // btnRestart
+            // 
+            btnRestart.Location = new Point(349, 218);
+            btnRestart.Name = "btnRestart";
+            btnRestart.Size = new Size(109, 40);
+            btnRestart.TabIndex = 6;
+            btnRestart.Text = "Restart";
+            btnRestart.UseVisualStyleBackColor = true;
+            btnRestart.Click += btnRestart_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(579, 395);
+            Controls.Add(btnRestart);
             Controls.Add(btnYeni);
             Controls.Add(txtSure);
             Controls.Add(txtMayin);
@@ -131,5 +149,6 @@
         private TextBox txtSure;
         private System.Windows.Forms.Timer timer2;
         private Button btnYeni;
+        private Button btnRestart;
     }
 }
