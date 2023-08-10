@@ -38,6 +38,7 @@
             timer2 = new System.Windows.Forms.Timer(components);
             btnYeni = new Button();
             btnRestart = new Button();
+            btnYardım = new Button();
             SuspendLayout();
             // 
             // timer1
@@ -120,11 +121,22 @@
             btnRestart.UseVisualStyleBackColor = true;
             btnRestart.Click += btnRestart_Click;
             // 
+            // btnYardım
+            // 
+            btnYardım.Location = new Point(349, 264);
+            btnYardım.Name = "btnYardım";
+            btnYardım.Size = new Size(109, 40);
+            btnYardım.TabIndex = 7;
+            btnYardım.Text = "Yardım";
+            btnYardım.UseVisualStyleBackColor = true;
+            btnYardım.Click += btnYardım_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(579, 395);
+            Controls.Add(btnYardım);
             Controls.Add(btnRestart);
             Controls.Add(btnYeni);
             Controls.Add(txtSure);
@@ -150,5 +162,6 @@
         private System.Windows.Forms.Timer timer2;
         private Button btnYeni;
         private Button btnRestart;
+        private Button btnYardım;
     }
 }
