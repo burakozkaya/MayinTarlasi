@@ -59,35 +59,36 @@ namespace MayinTarlasi
                 {
                     item.BackColor = Color.Red;
                 }
-
+                btnYardım.Focus();
             }
             else
             {
                 dicN.Remove((x, y));
                 buttons[x, y].Enabled = false;
-                btn.Focus();
                 buttons[x, y].BackColor = Color.Green;
                 if (dicN.Count == 0)
                 {
                     MessageBox.Show("Tebrikler Oynu kazandınız");
                     DialogRes();
                 }
-
-                int count = 0;
-                for (int i = -1; i <= 1; i++)
+                else
                 {
-                    for (int j = -1; j <= 1; j++)
+                    int count = 0;
+                    for (int i = -1; i <= 1; i++)
                     {
-                        if (i == 0 && j == 0)
-                            continue;
-                        if (dicBomb.ContainsKey((x + i, y + j)))
+                        for (int j = -1; j <= 1; j++)
                         {
-                            count++;
-                        }
+                            if (i == 0 && j == 0)
+                                continue;
+                            if (dicBomb.ContainsKey((x + i, y + j)))
+                            {
+                                count++;
+                            }
 
+                        }
                     }
+                    btn.Text = count.ToString();
                 }
-                btn.Text = count.ToString();
 
             }
 
