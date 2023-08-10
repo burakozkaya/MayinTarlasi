@@ -181,6 +181,7 @@
                 }
 
         }
+        //buttonların oluşturulduğu metot
         private void TableMaker(int temp)
         {
             x = 5;
@@ -211,7 +212,7 @@
                 x = 5;
             }
         }
-
+        //devam etmek istiyor musun popupunu çalıştıran metot
         private void DialogRes()
         {
             tekrarOyna = MessageBox.Show("Devam etmek istiyor musunuz ?", tempName, MessageBoxButtons.YesNo);
@@ -221,19 +222,7 @@
 
                 if (ayniAyar == DialogResult.Yes)
                 {
-                    dicBomb.Clear();
-                    dicN.Clear();
-                    foreach (var item in buttons)
-                    {
-                        item.Text = string.Empty;
-                        item.BackColor = Color.White;
-                        item.Enabled = true;
-                    }
-                    BombMaker(tempBomb, 10);
-                    count = countTemp;
-                    LabelSetter();
-                    timer1.Start();
-
+                    Restart();
                 }
                 else
                 {
@@ -263,8 +252,17 @@
         {
             Restart();
         }
+        //
         private void Restart()
         {
+            dicBomb.Clear();
+            dicN.Clear();
+            foreach (var item in buttons)
+            {
+                item.Text = string.Empty;
+                item.BackColor = Color.White;
+                item.Enabled = true;
+            }
             countTemp = count;
             btnBaslat.Enabled = false;
             txtMayin.Enabled = false;
@@ -282,6 +280,7 @@
             txtSure.TabStop = false;
             label1.Enabled = false;
             label2.Enabled = false;
+            btnYardım.TabStop = false;
             btnRestart.Enabled = false;
             btnRestart.TabStop = false;
             btnBaslat.TabStop = false;
