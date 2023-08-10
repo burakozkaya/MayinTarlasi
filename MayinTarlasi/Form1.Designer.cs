@@ -36,6 +36,7 @@
             txtMayin = new TextBox();
             txtSure = new TextBox();
             timer2 = new System.Windows.Forms.Timer(components);
+            btnYeni = new Button();
             SuspendLayout();
             // 
             // timer1
@@ -92,11 +93,22 @@
             timer2.Interval = 1000;
             timer2.Tick += timer2_Tick;
             // 
+            // btnYeni
+            // 
+            btnYeni.Location = new Point(349, 172);
+            btnYeni.Name = "btnYeni";
+            btnYeni.Size = new Size(109, 40);
+            btnYeni.TabIndex = 5;
+            btnYeni.Text = "Yeni Oyun";
+            btnYeni.UseVisualStyleBackColor = true;
+            btnYeni.Click += btnYeni_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(579, 395);
+            Controls.Add(btnYeni);
             Controls.Add(txtSure);
             Controls.Add(txtMayin);
             Controls.Add(btnBaslat);
@@ -118,5 +130,6 @@
         private TextBox txtMayin;
         private TextBox txtSure;
         private System.Windows.Forms.Timer timer2;
+        private Button btnYeni;
     }
 }

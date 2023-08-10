@@ -11,6 +11,7 @@
         Dictionary<(int, int), string> dicN = new Dictionary<(int, int), string>();
         DialogResult tekrarOyna;
         DialogResult ayniAyar;
+        DialogResult yeniOyun;
 
         (int, int) temp;
         int count;
@@ -253,6 +254,16 @@
             {
                 MessageBox.Show("Uygulama sonlandırıldı");
                 Application.Exit();
+            }
+        }
+
+        private void btnYeni_Click(object sender, EventArgs e)
+        {
+            yeniOyun = MessageBox.Show("Yeni bir oyun oluşturmak istediğinizden emin misiniz ?","Mayın Tarlası",MessageBoxButtons.YesNo);
+            if(yeniOyun == DialogResult.Yes)
+            {
+                Application.Restart();
+                Environment.Exit(0);
             }
         }
     }
