@@ -293,16 +293,6 @@
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnYardım_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\nYeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\nAyarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.\nEkrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\nBu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.");

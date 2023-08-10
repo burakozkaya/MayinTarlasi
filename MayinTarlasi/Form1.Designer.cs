@@ -56,7 +56,6 @@
             label1.TabIndex = 0;
             label1.Text = "0";
             label1.TextAlign = ContentAlignment.MiddleCenter;
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -68,7 +67,6 @@
             label2.TabIndex = 1;
             label2.Text = "Kalan Süre:";
             label2.TextAlign = ContentAlignment.MiddleCenter;
-            label2.Click += label2_Click;
             // 
             // btnBaslat
             // 
