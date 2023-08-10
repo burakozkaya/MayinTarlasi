@@ -12,6 +12,7 @@
         DialogResult tekrarOyna;
         DialogResult ayniAyar;
         DialogResult yeniOyun;
+        string tempName = "Mayın Tarlası";
 
         (int, int) temp;
         int count;
@@ -22,9 +23,11 @@
         Button[,] buttons = new Button[10, 10];
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Name = "Mayın Tarlası";
-            this.Size = new Size(500, 330);
+            this.Name = tempName;
+            this.Text = tempName;
+            this.Size = new Size(500, 345);
             this.AutoSize = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             TableMaker(count2);
         }
         private void BombCheck(object? sender, MouseEventArgs e)
@@ -191,7 +194,7 @@
         private void TableMaker(int temp)
         {
 
-            int x = 0;
+            int x = 5;
             int y = 0;
             for (int i = 0; i < temp; i++)
             {
@@ -216,16 +219,16 @@
                 }
 
                 y += 30;
-                x = 0;
+                x = 5;
             }
         }
 
         private void DialogRes()
         {
-            tekrarOyna = MessageBox.Show("Devam etmek istiyor musunuz ?", "Mayın Tarlası", MessageBoxButtons.YesNo);
+            tekrarOyna = MessageBox.Show("Devam etmek istiyor musunuz ?", tempName, MessageBoxButtons.YesNo);
             if (tekrarOyna == DialogResult.Yes)
             {
-                ayniAyar = MessageBox.Show("Aynı ayarlarla oynamak ister misiniz ?", "Mayın Tarlası", MessageBoxButtons.YesNo);
+                ayniAyar = MessageBox.Show("Aynı ayarlarla oynamak ister misiniz ?", tempName, MessageBoxButtons.YesNo);
 
                 if (ayniAyar == DialogResult.Yes)
                 {
@@ -259,7 +262,7 @@
 
         private void btnYeni_Click(object sender, EventArgs e)
         {
-            yeniOyun = MessageBox.Show("Yeni bir oyun oluşturmak istediğinizden emin misiniz ?","Mayın Tarlası",MessageBoxButtons.YesNo);
+            yeniOyun = MessageBox.Show("Yeni bir oyun oluşturmak istediğinizden emin misiniz ?", tempName, MessageBoxButtons.YesNo);
             if(yeniOyun == DialogResult.Yes)
             {
                 Application.Restart();
