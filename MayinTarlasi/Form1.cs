@@ -7,7 +7,7 @@
 
             InitializeComponent();
         }
-        Dictionary<(int, int), string> dic = new Dictionary<(int, int), string>();
+        Dictionary<(int, int), Button> dicBomb = new Dictionary<(int, int), Button>();
         Dictionary<(int, int), string> dicN = new Dictionary<(int, int), string>();
         DialogResult tekrarOyna;
 
@@ -41,10 +41,20 @@
                     }
                 }
             temp = (x, y);
-            if (dic.ContainsKey(temp))
+            if (dicBomb.ContainsKey(temp))
             {
+                timer1.Stop();
                 timer2.Enabled = true;
                 timer2.Start();
+                foreach (var item in buttons)
+                {
+                    item.Enabled = false;
+                }
+                foreach (var item in dicBomb.Values)
+                {
+                    item.BackColor = Color.Red;
+                }
+                
             }
             else
             {
@@ -64,7 +74,7 @@
                     {
                         if (i == 0 && j == 0)
                             continue;
-                        if (dic.ContainsKey((x + i, y + j)))
+                        if (dicBomb.ContainsKey((x + i, y + j)))
                         {
                             count++;
                         }
@@ -97,12 +107,14 @@
 
         private void btnBaslat_Click(object sender, EventArgs e)
         {
+            
             bool flag1, flag2;
             string tempX = "";
             flag2 = int.TryParse(txtSure.Text, out count);
             flag1 = int.TryParse(txtMayin.Text, out int tempBomb);
             if (flag1 && flag2 && count > 30)
             {
+                btnBaslat.Enabled = false;
                 int temp = 10;
                 timer1.Enabled = true;
                 timer1.Start();
@@ -129,7 +141,7 @@
             count2--;
             if (count2 == 0)
             {
-
+                
                 timer2.Stop();
                 MessageBox.Show("Oynu kaybettiniz.");
                 DialogRes();
@@ -146,16 +158,18 @@
         {
             for (int i = 0; i < bomb; i++)
             {
+                int tempI = new Random().Next(0, x);
+                int tempY = new Random().Next(0, x);
                 temp = (new Random().Next(0, x), new Random().Next(0, x));
-                if (!dic.ContainsKey(temp))
-                    dic.Add(temp, "bomb");
+                if (!dicBomb.ContainsKey((tempI,tempY)))
+                    dicBomb.Add((tempI,tempY), buttons[tempI,tempY]);
                 else
                     i--;
             }
             for (int i = 0; i < x; i++)
                 for (int j = 0; j < x; j++)
                 {
-                    if (!dic.ContainsKey((i, j)))
+                    if (!dicBomb.ContainsKey((i, j)))
                         dicN.Add((i, j), "neutral");
                     else
                         buttons[i, j].Text = "bomb";
