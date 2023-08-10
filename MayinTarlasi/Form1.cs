@@ -25,9 +25,6 @@
             FormSettings();
             TableMaker(count2);
         }
-
-
-
         private void BombCheck(object? sender, MouseEventArgs e)
         {
             Button btn = sender as Button;
@@ -91,7 +88,6 @@
             }
 
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             count--;
@@ -107,9 +103,6 @@
                 DialogRes();
             }
         }
-
-
-
         private void btnBaslat_Click(object sender, EventArgs e)
         {
 
@@ -119,7 +112,7 @@
             flag1 = int.TryParse(txtMayin.Text, out tempBomb);
             if (flag1 && flag2 && count >= 30)
             {
-                Restart();
+                RestartGame();
 
             }
             else
@@ -135,9 +128,6 @@
             }
 
         }
-
-
-
         private void timer2_Tick(object sender, EventArgs e)
         {
             count2--;
@@ -149,13 +139,72 @@
             }
 
         }
+        private void btnYeni_Click(object sender, EventArgs e)
+        {
+            yeniOyun = MessageBox.Show("Yeni bir oyun oluşturmak istediğinizden emin misiniz ?", tempName, MessageBoxButtons.YesNo);
+            if (yeniOyun == DialogResult.Yes)
+            {
+                Application.Restart();
+                Environment.Exit(0);
+            }
+        }
+
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            RestartGame();
+        }
+        private void btnYardım_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\nYeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\nAyarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.\nEkrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\nBu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.");
+        }
+        //oynu aynı ayarlarla tekrar başlatmayı sağlayan method
+        private void RestartGame()
+        {
+            dicBomb.Clear();
+            dicN.Clear();
+            foreach (var item in buttons)
+            {
+                item.Text = string.Empty;
+                item.BackColor = Color.White;
+                item.Enabled = true;
+            }
+            countTemp = count;
+            btnBaslat.Enabled = false;
+            txtMayin.Enabled = false;
+            txtSure.Enabled = false;
+            int temp = 10;
+            timer1.Enabled = true;
+            timer1.Start();
+            LabelSetter();
+            BombMaker(tempBomb, temp);
+            btnRestart.Enabled = true;
+        }
+        //Form ayarlarını yapan metot
+        private void FormSettings()
+        {
+            txtMayin.TabStop = false;
+            txtSure.TabStop = false;
+            label1.Enabled = false;
+            label2.Enabled = false;
+            btnYardım.TabStop = false;
+            btnRestart.Enabled = false;
+            btnRestart.TabStop = false;
+            btnBaslat.TabStop = false;
+            btnYeni.TabStop = false;
+            this.Name = tempName;
+            this.Text = tempName;
+            this.Size = new Size(500, 345);
+            this.AutoSize = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+        }
+        //sürenin ayarlandığı method
         private void LabelSetter()
         {
             string tempSaniye = count % 60 < 10 ? "0" + (count % 60).ToString() : (count % 60).ToString();
             int tempDakika = (count / 60);
             label1.Text = tempDakika > 0 ? $"{tempDakika}:{tempSaniye}" : $"{tempSaniye}";
         }
-
+        //Bombaların oluşturulduğu method
         private void BombMaker(int bomb, int x)
         {
             for (int i = 0; i < bomb; i++)
@@ -222,7 +271,7 @@
 
                 if (ayniAyar == DialogResult.Yes)
                 {
-                    Restart();
+                    RestartGame();
                 }
                 else
                 {
@@ -238,63 +287,6 @@
             }
         }
 
-        private void btnYeni_Click(object sender, EventArgs e)
-        {
-            yeniOyun = MessageBox.Show("Yeni bir oyun oluşturmak istediğinizden emin misiniz ?", tempName, MessageBoxButtons.YesNo);
-            if (yeniOyun == DialogResult.Yes)
-            {
-                Application.Restart();
-                Environment.Exit(0);
-            }
-        }
 
-        private void btnRestart_Click(object sender, EventArgs e)
-        {
-            Restart();
-        }
-        //
-        private void Restart()
-        {
-            dicBomb.Clear();
-            dicN.Clear();
-            foreach (var item in buttons)
-            {
-                item.Text = string.Empty;
-                item.BackColor = Color.White;
-                item.Enabled = true;
-            }
-            countTemp = count;
-            btnBaslat.Enabled = false;
-            txtMayin.Enabled = false;
-            txtSure.Enabled = false;
-            int temp = 10;
-            timer1.Enabled = true;
-            timer1.Start();
-            LabelSetter();
-            BombMaker(tempBomb, temp);
-            btnRestart.Enabled = true;
-        }
-        private void FormSettings()
-        {
-            txtMayin.TabStop = false;
-            txtSure.TabStop = false;
-            label1.Enabled = false;
-            label2.Enabled = false;
-            btnYardım.TabStop = false;
-            btnRestart.Enabled = false;
-            btnRestart.TabStop = false;
-            btnBaslat.TabStop = false;
-            btnYeni.TabStop = false;
-            this.Name = tempName;
-            this.Text = tempName;
-            this.Size = new Size(500, 345);
-            this.AutoSize = false;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-        }
-
-        private void btnYardım_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\nYeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\nAyarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.\nEkrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\nBu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.");
-        }
     }
 }
