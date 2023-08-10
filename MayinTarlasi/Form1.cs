@@ -162,7 +162,7 @@ namespace MayinTarlasi
         }
         private void btnYardım_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\nYeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\nAyarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.\nEkrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\nBu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.");
+            MessageBox.Show("1) Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\n2) Yeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\n3) Ayarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.\n4) Ekrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\n5) Bu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.");
         }
         //oynu aynı ayarlarla tekrar başlatmayı sağlayan method
         private void RestartGame()
