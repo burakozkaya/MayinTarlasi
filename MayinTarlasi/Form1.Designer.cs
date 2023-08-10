@@ -46,7 +46,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(501, 44);
+            label1.Location = new Point(420, 50);
             label1.Name = "label1";
             label1.Size = new Size(19, 15);
             label1.TabIndex = 0;
@@ -55,7 +55,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(430, 44);
+            label2.Location = new Point(349, 50);
             label2.Name = "label2";
             label2.Size = new Size(65, 15);
             label2.TabIndex = 1;
@@ -63,7 +63,7 @@
             // 
             // btnBaslat
             // 
-            btnBaslat.Location = new Point(430, 120);
+            btnBaslat.Location = new Point(349, 126);
             btnBaslat.Name = "btnBaslat";
             btnBaslat.Size = new Size(109, 40);
             btnBaslat.TabIndex = 2;
@@ -73,7 +73,7 @@
             // 
             // txtMayin
             // 
-            txtMayin.Location = new Point(430, 62);
+            txtMayin.Location = new Point(349, 68);
             txtMayin.Name = "txtMayin";
             txtMayin.PlaceholderText = "Mayın sayısını girin";
             txtMayin.Size = new Size(109, 23);
@@ -81,7 +81,7 @@
             // 
             // txtSure
             // 
-            txtSure.Location = new Point(430, 91);
+            txtSure.Location = new Point(349, 97);
             txtSure.Name = "txtSure";
             txtSure.PlaceholderText = "Süre bilgisini girin";
             txtSure.Size = new Size(109, 23);

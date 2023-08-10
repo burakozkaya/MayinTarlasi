@@ -10,17 +10,20 @@
         Dictionary<(int, int), Button> dicBomb = new Dictionary<(int, int), Button>();
         Dictionary<(int, int), string> dicN = new Dictionary<(int, int), string>();
         DialogResult tekrarOyna;
+        DialogResult ayniAyar;
 
         (int, int) temp;
         int count;
+        int countTemp;
+        int tempBomb;
         int count2 = 10;
 
         Button[,] buttons = new Button[10, 10];
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Name = "Mayın Tarlası";
+            this.Size = new Size(500, 330);
             this.AutoSize = false;
-            this.Size = new Size(600, 400);
             TableMaker(count2);
         }
         private void BombCheck(object? sender, MouseEventArgs e)
@@ -54,7 +57,7 @@
                 {
                     item.BackColor = Color.Red;
                 }
-                
+
             }
             else
             {
@@ -107,14 +110,17 @@
 
         private void btnBaslat_Click(object sender, EventArgs e)
         {
-            
+
             bool flag1, flag2;
             string tempX = "";
             flag2 = int.TryParse(txtSure.Text, out count);
-            flag1 = int.TryParse(txtMayin.Text, out int tempBomb);
+            flag1 = int.TryParse(txtMayin.Text, out tempBomb);
             if (flag1 && flag2 && count > 30)
             {
+                countTemp = count;
                 btnBaslat.Enabled = false;
+                txtMayin.Enabled = false;
+                txtSure.Enabled = false;
                 int temp = 10;
                 timer1.Enabled = true;
                 timer1.Start();
@@ -141,11 +147,13 @@
             count2--;
             if (count2 == 0)
             {
-                
+
                 timer2.Stop();
                 MessageBox.Show("Oynu kaybettiniz.");
                 DialogRes();
+                count2 = 10;
             }
+
         }
         private void LabelSetter()
         {
@@ -161,8 +169,8 @@
                 int tempI = new Random().Next(0, x);
                 int tempY = new Random().Next(0, x);
                 temp = (new Random().Next(0, x), new Random().Next(0, x));
-                if (!dicBomb.ContainsKey((tempI,tempY)))
-                    dicBomb.Add((tempI,tempY), buttons[tempI,tempY]);
+                if (!dicBomb.ContainsKey((tempI, tempY)))
+                    dicBomb.Add((tempI, tempY), buttons[tempI, tempY]);
                 else
                     i--;
             }
@@ -216,8 +224,30 @@
             tekrarOyna = MessageBox.Show("Devam etmek istiyor musunuz ?", "Mayın Tarlası", MessageBoxButtons.YesNo);
             if (tekrarOyna == DialogResult.Yes)
             {
-                Application.Restart();
-                Environment.Exit(0);
+                ayniAyar = MessageBox.Show("Aynı ayarlarla oynamak ister misiniz ?", "Mayın Tarlası", MessageBoxButtons.YesNo);
+
+                if (ayniAyar == DialogResult.Yes)
+                {
+                    dicBomb.Clear();
+                    dicN.Clear();
+                    foreach (var item in buttons)
+                    {
+                        item.Text = string.Empty;
+                        item.BackColor = Color.White;
+                        item.Enabled = true;
+                    }
+                    BombMaker(tempBomb, 10);
+                    count = countTemp;
+                    LabelSetter();
+                    timer1.Start();
+
+                }
+                else
+                {
+                    Application.Restart();
+                    Environment.Exit(0);
+                }
+
             }
             else
             {
