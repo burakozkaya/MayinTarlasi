@@ -65,7 +65,6 @@
         {
 
             bool flag1, flag2;
-            string tempX = "";
             flag1 = int.TryParse(txtMayin.Text, out tempBomb);
             flag2 = int.TryParse(txtSure.Text, out count);
             if (flag1 && flag2 && count >= 30 && tempBomb > 0)
