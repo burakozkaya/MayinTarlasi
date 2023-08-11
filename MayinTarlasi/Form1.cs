@@ -67,7 +67,7 @@
                     {
                         for (int j = -1; j <= 1; j++)
                         {
-                            if (i == 0 && j == 0)
+                            if ((i == 0 && j == 0) || (x + i >= 10 || y + j >= 10||x+i<0||y+j<0))
                                 continue;
                             if (dicBomb.Contains(buttons[x + i, y + j]))
                             {
@@ -223,9 +223,6 @@
                 {
                     if (!dicBomb.Contains(buttons[i, j]))
                         dicN.Add(buttons[i, j], (i, j));
-                    else
-                        buttons[i, j].Text = "bomb";//Beni unutma 
-
                     buttons[i, j].Enabled = true;
 
                 }
