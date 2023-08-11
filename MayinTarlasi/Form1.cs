@@ -113,8 +113,8 @@
         {
             MessageBox.Show("1) Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\n2) Yeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\n3) Ayarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.Aynı ayarlarla oynamak için Restart butonuna basın.\n4) Ekrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\n5) Bu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.\n6)Oynu kazanmak için tüm mayınsız alanlara tıklamnız lazım\nİyi eğlenceler!\n© 2023 Burak.Ozky");
         }
-        //oynu aynı ayarlarla tekrar başlatmayı sağlayan method
 
+        //Bombaya tıklanmadığında çalışan metot
         private void NonBombClick(Button btn)
         {
             temp = dicN[btn];
@@ -148,6 +148,7 @@
                 btn.Text = count.ToString();
             }
         }
+        // Textboxların hatalı olduğu noktayı kullanıcıya söyleyen metot
         private string ErrorMessage(bool flag1, bool flag2)
         {
             string tempX = "";
@@ -168,6 +169,7 @@
             return x + i >= 10 || y + j >= 10 || x + i < 0 || y + j < 0;
         }
 
+        //Bombaya tıklandığında çalışan kaybetmeyi çalıştıran metot
         private void EndGameLoss()
         {
             timer1.Stop();
@@ -185,6 +187,7 @@
 
             btnYardım.Focus();
         }
+        // Oynu restart eden buton 
         private void RestartGame()
         {
             dicBomb.Clear();
