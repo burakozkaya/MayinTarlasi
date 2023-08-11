@@ -22,66 +22,30 @@
         Button[,] buttons = new Button[10, 10];
         private void Form1_Load(object sender, EventArgs e)
         {
+            InitializeGame();
+        }
+
+        private void InitializeGame()
+        {
             FormSettings();
             TableMaker(count2);
         }
+
         private void BombCheck(object? sender, MouseEventArgs e)
         {
             timer1.Start();
             Button btn = sender as Button;
             if (dicBomb.Contains(btn))
             {
-                timer1.Stop(); 
-                foreach (var item in buttons)
-                {
-                    item.Enabled = false;
-                }
-                foreach (var item in dicBomb)
-                {
-                    item.BackColor = Color.Red;
-                }
-                MessageBox.Show("Bombaya tıklandı\nOynu kaybettiniz.");
-                timer2.Enabled = true;
-                timer2.Start();
-
-                btnYardım.Focus();
+                EndGameLoss();
             }
             else
             {
-                temp = dicN[btn];
-                x = temp.Item1;
-                y = temp.Item2;
-                dicN.Remove(btn);
-                buttons[x, y].Enabled = false;
-                buttons[x, y].BackColor = Color.Green;
-                if (dicN.Count == 0)
-                {
-                    timer1.Stop();
-                    MessageBox.Show("Tebrikler Oynu kazandınız");
-                    DialogRes();
-                }
-                else
-                {
-                    int count = 0;
-                    for (int i = -1; i <= 1; i++)
-                    {
-                        for (int j = -1; j <= 1; j++)
-                        {
-                            if ((i == 0 && j == 0) || (x + i >= 10 || y + j >= 10||x+i<0||y+j<0))
-                                continue;
-                            if (dicBomb.Contains(buttons[x + i, y + j]))
-                            {
-                                count++;
-                            }
-
-                        }
-                    }
-                    btn.Text = count.ToString();
-                }
+                NonBombClick(btn);
 
             }
-
         }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             count--;
@@ -115,15 +79,7 @@
             }
             else
             {
-                if (!flag1)
-                    tempX += "Mayın alanını doğru giriniz. ";
-                if (flag1 && tempBomb < 0)
-                    tempX += "Mayın alanı 0 veya 0'dan küçük olamaz. ";
-                if (!flag2)
-                    tempX += "Sürenin doğru girildiğinden emin olunuz. ";
-                if (count < 30 && flag2)
-                    tempX += "Süre 30 saniyeden az olamaz.";
-                MessageBox.Show(tempX);
+                ErrorMessage(flag1, flag2);
                 return;
             }
 
@@ -158,6 +114,77 @@
             MessageBox.Show("1) Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\n2) Yeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\n3) Ayarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.Aynı ayarlarla oynamak için Restart butonuna basın.\n4) Ekrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\n5) Bu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.\n6)Oynu kazanmak için tüm mayınsız alanlara tıklamnız lazım\nİyi eğlenceler!\n© 2023 Burak.Ozky");
         }
         //oynu aynı ayarlarla tekrar başlatmayı sağlayan method
+
+        private void NonBombClick(Button btn)
+        {
+            temp = dicN[btn];
+            x = temp.Item1;
+            y = temp.Item2;
+            dicN.Remove(btn);
+            buttons[x, y].Enabled = false;
+            buttons[x, y].BackColor = Color.Green;
+            if (dicN.Count == 0)
+            {
+                timer1.Stop();
+                MessageBox.Show("Tebrikler Oynu kazandınız");
+                DialogRes();
+            }
+            else
+            {
+                int count = 0;
+                for (int i = -1; i <= 1; i++)
+                {
+                    for (int j = -1; j <= 1; j++)
+                    {
+                        if ((i == 0 && j == 0) || IsOutOfBounds(i, j))
+                            continue;
+                        if (dicBomb.Contains(buttons[x + i, y + j]))
+                        {
+                            count++;
+                        }
+
+                    }
+                }
+                btn.Text = count.ToString();
+            }
+        }
+        private string ErrorMessage(bool flag1, bool flag2)
+        {
+            string tempX = "";
+            if (!flag1)
+                tempX += "Mayın alanını doğru giriniz. ";
+            if (flag1 && tempBomb < 0)
+                tempX += "Mayın alanı 0 veya 0'dan küçük olamaz. ";
+            if (!flag2)
+                tempX += "Sürenin doğru girildiğinden emin olunuz. ";
+            if (count < 30 && flag2)
+                tempX += "Süre 30 saniyeden az olamaz.";
+            MessageBox.Show(tempX);
+            return tempX;
+        }
+
+        private bool IsOutOfBounds(int i, int j)
+        {
+            return x + i >= 10 || y + j >= 10 || x + i < 0 || y + j < 0;
+        }
+
+        private void EndGameLoss()
+        {
+            timer1.Stop();
+            timer2.Enabled = true;
+            timer2.Start();
+            foreach (var item in buttons)
+            {
+                item.Enabled = false;
+            }
+            foreach (var item in dicBomb)
+            {
+                item.BackColor = Color.Red;
+            }
+            MessageBox.Show("Bombaya tıklandı\nOynu kaybettiniz.");
+
+            btnYardım.Focus();
+        }
         private void RestartGame()
         {
             dicBomb.Clear();
@@ -243,14 +270,11 @@
 
                         Size = new Size(30, 30),
                         Location = new Point(x, y),
+                        TabStop = false,
+                        Enabled = false,
 
                     };
-
                     x += 30;
-                    buttons[i, j].TabStop = false;
-                    buttons[i, j].Enabled = false;
-
-
                     this.Controls.Add(buttons[i, j]);
                     buttons[i, j].MouseClick += BombCheck;
                 }
