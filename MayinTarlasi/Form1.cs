@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace MayinTarlasi
+﻿namespace MayinTarlasi
 {
     public partial class Form1 : Form
     {
@@ -10,7 +8,7 @@ namespace MayinTarlasi
             InitializeComponent();
         }
 
-        Dictionary<Button, (int, int)> dicBomb = new Dictionary<Button, (int, int)>();
+        List<Button> dicBomb = new List<Button>();
 
         Dictionary<Button, (int, int)> dicN = new Dictionary<Button, (int, int)>();
 
@@ -31,20 +29,21 @@ namespace MayinTarlasi
         {
             timer1.Start();
             Button btn = sender as Button;
-            if (dicBomb.ContainsKey(btn))
+            if (dicBomb.Contains(btn))
             {
-                timer1.Stop();
-                MessageBox.Show("Bombaya tıklandı\nOynu kaybettiniz.");
-                timer2.Enabled = true;
-                timer2.Start();
+                timer1.Stop(); 
                 foreach (var item in buttons)
                 {
                     item.Enabled = false;
                 }
-                foreach (var item in dicBomb.Keys)
+                foreach (var item in dicBomb)
                 {
                     item.BackColor = Color.Red;
                 }
+                MessageBox.Show("Bombaya tıklandı\nOynu kaybettiniz.");
+                timer2.Enabled = true;
+                timer2.Start();
+
                 btnYardım.Focus();
             }
             else
@@ -57,6 +56,7 @@ namespace MayinTarlasi
                 buttons[x, y].BackColor = Color.Green;
                 if (dicN.Count == 0)
                 {
+                    timer1.Stop();
                     MessageBox.Show("Tebrikler Oynu kazandınız");
                     DialogRes();
                 }
@@ -69,7 +69,7 @@ namespace MayinTarlasi
                         {
                             if (i == 0 && j == 0)
                                 continue;
-                            if (dicBomb.ContainsValue((x + i, y + j)))
+                            if (dicBomb.Contains(buttons[x + i, y + j]))
                             {
                                 count++;
                             }
@@ -104,7 +104,7 @@ namespace MayinTarlasi
             string tempX = "";
             flag1 = int.TryParse(txtMayin.Text, out tempBomb);
             flag2 = int.TryParse(txtSure.Text, out count);
-            if (flag1 && flag2 && count >= 30&& tempBomb > 0)
+            if (flag1 && flag2 && count >= 30 && tempBomb > 0)
             {
                 countTemp = count;
                 RestartGame();
@@ -213,18 +213,18 @@ namespace MayinTarlasi
                 int tempI = new Random().Next(0, x);
                 int tempY = new Random().Next(0, x);
                 temp = (new Random().Next(0, x), new Random().Next(0, x));
-                if (!dicBomb.ContainsValue((tempI, tempY)))
-                    dicBomb.Add( buttons[tempI, tempY], (tempI, tempY));
+                if (!dicBomb.Contains(buttons[tempI, tempY]))
+                    dicBomb.Add(buttons[tempI, tempY]);
                 else
                     i--;
             }
             for (int i = 0; i < x; i++)
                 for (int j = 0; j < x; j++)
                 {
-                    if (!dicBomb.ContainsValue((i, j)))
-                        dicN.Add(buttons[i,j], (i, j));
+                    if (!dicBomb.Contains(buttons[i, j]))
+                        dicN.Add(buttons[i, j], (i, j));
                     else
-                        buttons[i, j].Text = "bomb";
+                        buttons[i, j].Text = "bomb";//Beni unutma 
 
                     buttons[i, j].Enabled = true;
 
@@ -249,7 +249,7 @@ namespace MayinTarlasi
 
                     };
 
-                    x += 31;
+                    x += 30;
                     buttons[i, j].TabStop = false;
                     buttons[i, j].Enabled = false;
 
