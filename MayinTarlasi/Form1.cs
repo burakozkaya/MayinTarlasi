@@ -10,9 +10,9 @@ namespace MayinTarlasi
             InitializeComponent();
         }
 
-        Dictionary<(int, int), Button> dicBomb = new Dictionary<(int, int), Button>();
+        Dictionary<Button, (int, int)> dicBomb = new Dictionary<Button, (int, int)>();
 
-        Dictionary<(int, int), string> dicN = new Dictionary<(int, int), string>();
+        Dictionary<Button, (int, int)> dicN = new Dictionary<Button, (int, int)>();
 
         DialogResult tekrarOyna, ayniAyar, yeniOyun;
 
@@ -31,31 +31,17 @@ namespace MayinTarlasi
         {
             timer1.Start();
             Button btn = sender as Button;
-            x = 1;
-            y = 1;
-            for (int i = 0; i < 10; i++)
-                for (int j = 0; j < 10; j++)
-                {
-                    if (buttons[i, j] == btn)
-                    {
-                        x = i;
-                        y = j;
-                        i = 10;
-                        j = 10;
-                    }
-                }
-            temp = (x, y);
-            if (dicBomb.ContainsKey(temp))
+            if (dicBomb.ContainsKey(btn))
             {
-                MessageBox.Show("Bombaya tıklandı\nOynu kaybettiniz.");
                 timer1.Stop();
+                MessageBox.Show("Bombaya tıklandı\nOynu kaybettiniz.");
                 timer2.Enabled = true;
                 timer2.Start();
                 foreach (var item in buttons)
                 {
                     item.Enabled = false;
                 }
-                foreach (var item in dicBomb.Values)
+                foreach (var item in dicBomb.Keys)
                 {
                     item.BackColor = Color.Red;
                 }
@@ -63,7 +49,10 @@ namespace MayinTarlasi
             }
             else
             {
-                dicN.Remove((x, y));
+                temp = dicN[btn];
+                x = temp.Item1;
+                y = temp.Item2;
+                dicN.Remove(btn);
                 buttons[x, y].Enabled = false;
                 buttons[x, y].BackColor = Color.Green;
                 if (dicN.Count == 0)
@@ -80,7 +69,7 @@ namespace MayinTarlasi
                         {
                             if (i == 0 && j == 0)
                                 continue;
-                            if (dicBomb.ContainsKey((x + i, y + j)))
+                            if (dicBomb.ContainsValue((x + i, y + j)))
                             {
                                 count++;
                             }
@@ -166,7 +155,7 @@ namespace MayinTarlasi
         }
         private void btnYardım_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("1) Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\n2) Yeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\n3) Ayarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.\n4) Ekrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\n5) Bu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.");
+            MessageBox.Show("1) Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\n2) Yeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\n3) Ayarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.Aynı ayarlarla oynamak için Restart butonuna basın.\n4) Ekrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\n5) Bu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.\n6)Oynu kazanmak için tüm mayınsız alanlara tıklamnız lazım\nİyi eğlenceler!\n© 2023 Burak.Ozky");
         }
         //oynu aynı ayarlarla tekrar başlatmayı sağlayan method
         private void RestartGame()
@@ -184,7 +173,6 @@ namespace MayinTarlasi
             txtMayin.Enabled = false;
             txtSure.Enabled = false;
             int temp = 10;
-            //timer1.Enabled = true;
             timer1.Stop();
             timer2.Stop();
             count2 = 10;
@@ -225,16 +213,16 @@ namespace MayinTarlasi
                 int tempI = new Random().Next(0, x);
                 int tempY = new Random().Next(0, x);
                 temp = (new Random().Next(0, x), new Random().Next(0, x));
-                if (!dicBomb.ContainsKey((tempI, tempY)))
-                    dicBomb.Add((tempI, tempY), buttons[tempI, tempY]);
+                if (!dicBomb.ContainsValue((tempI, tempY)))
+                    dicBomb.Add( buttons[tempI, tempY], (tempI, tempY));
                 else
                     i--;
             }
             for (int i = 0; i < x; i++)
                 for (int j = 0; j < x; j++)
                 {
-                    if (!dicBomb.ContainsKey((i, j)))
-                        dicN.Add((i, j), "neutral");
+                    if (!dicBomb.ContainsValue((i, j)))
+                        dicN.Add(buttons[i,j], (i, j));
                     else
                         buttons[i, j].Text = "bomb";
 
@@ -299,12 +287,6 @@ namespace MayinTarlasi
                 Application.Exit();
             }
         }
-
-        private void btnBaslat_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
         private void btnBaslat_KeyDown(object sender, KeyEventArgs e)
         {
             Button btn = sender as Button;

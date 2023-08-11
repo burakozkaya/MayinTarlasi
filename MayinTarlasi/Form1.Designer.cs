@@ -78,7 +78,6 @@
             btnBaslat.UseVisualStyleBackColor = true;
             btnBaslat.Click += btnBaslat_Click;
             btnBaslat.KeyDown += btnBaslat_KeyDown;
-            btnBaslat.KeyPress += btnBaslat_KeyPress;
             // 
             // txtMayin
             // 
