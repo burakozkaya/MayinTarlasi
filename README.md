@@ -22,7 +22,7 @@ Sağ tıklama ile bayrak konur. Bayrak, oyuncunun potansiyel bir bomba olduğunu
 Oyunda bir süre sınırlaması vardır. Süre dolduğunda oyun kaybedilir.
 Tüm bombasız kareler açıldığında oyuncu oyunu kazanır.
 
-##Nasıl Kullanılır
+## Nasıl Kullanılır
 Oyunu başlatmak için "Mayın Sayısı" ve "Süre" alanlarına istenen değerleri girin.
 "Başlat" butonuna tıklayarak oyunu başlatın.
 Sol tıklama ile kareleri açarak ve sağ tıklama ile bayrak koyarak oyunu oynayın.
