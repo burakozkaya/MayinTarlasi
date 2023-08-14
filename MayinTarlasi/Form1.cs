@@ -2,12 +2,6 @@
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-
-            InitializeComponent();
-        }
-
         List<Button> dicBomb = new List<Button>();
 
         Dictionary<Button, (int, int)> dicN = new Dictionary<Button, (int, int)>();
@@ -17,26 +11,29 @@
         string tempName = "Mayın Tarlası";
 
         (int, int) temp;
-        int count, countTemp, tempBomb, count2 = 10, x, y, count3;
+
+        int count, countTemp, tempBomb, count2 = 10, x, y, count3, count4;
 
         Button[,] buttons = new Button[10, 10];
+        public Form1()
+        {
+
+            InitializeComponent();
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             InitializeGame();
         }
-
         private void InitializeGame()
         {
             FormSettings();
             TableMaker(count2);
         }
-
         private void BombCheck(object? sender, MouseEventArgs e)
         {
-
             timer1.Start();
             Button btn = sender as Button;
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && btn.Text!= "🚩")
             {
                 if (dicBomb.Contains(btn))
                 {
@@ -45,7 +42,6 @@
                 else
                 {
                     NonBombClick(btn);
-
                 }
             }
             else if (e.Button == MouseButtons.Right)
@@ -54,17 +50,20 @@
                 {
                     btn.Text = "";
                     count3++;
+                    if (dicBomb.Contains(btn))
+                        count4++;
                 }
                 else if (count3 != 0)
                 {
                     btn.Text = "🚩";
                     count3--;
+                    if (dicBomb.Contains(btn))
+                        count4--;
                 }
-                label3.Text = count3.ToString();
+                label3.Text = count4.ToString();
             }
 
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             count--;
@@ -82,7 +81,6 @@
         }
         private void btnBaslat_Click(object sender, EventArgs e)
         {
-
             bool flag1, flag2;
             flag1 = int.TryParse(txtMayin.Text, out tempBomb);
             flag2 = int.TryParse(txtSure.Text, out count);
@@ -122,7 +120,6 @@
                 Environment.Exit(0);
             }
         }
-
         private void btnRestart_Click(object sender, EventArgs e)
         {
             RestartGame();
@@ -131,7 +128,6 @@
         {
             MessageBox.Show("1) Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\n2) Yeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\n3) Ayarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.Aynı ayarlarla oynamak için Restart butonuna basın.\n4) Ekrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\n5) Bu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.\n6)Oynu kazanmak için tüm mayınsız alanlara tıklamnız lazım\nİyi eğlenceler!\n© 2023 Burak.Ozky");
         }
-
         //Bombaya tıklanmadığında çalışan metot
         private void NonBombClick(Button btn)
         {
@@ -181,7 +177,6 @@
             MessageBox.Show(tempX);
             return tempX;
         }
-
         private bool IsOutOfBounds(int i, int j)
         {
             return x + i >= 10 || y + j >= 10 || x + i < 0 || y + j < 0;
@@ -228,7 +223,8 @@
             LabelSetter();
             BombMaker(tempBomb, temp);
             count3 = tempBomb;
-            label4.Text = count3.ToString();
+            count4 = count3;
+            label3.Text = count3.ToString();
             btnRestart.Enabled = true;
         }
         //Form ayarlarını yapan metot
@@ -276,9 +272,7 @@
                     if (!dicBomb.Contains(buttons[i, j]))
                         dicN.Add(buttons[i, j], (i, j));
                     buttons[i, j].Enabled = true;
-
                 }
-
         }
         //buttonların oluşturulduğu metot
         private void TableMaker(int temp)
@@ -329,7 +323,6 @@
             }
             else
             {
-                MessageBox.Show("Uygulama sonlandırıldı");
                 Application.Exit();
             }
         }
