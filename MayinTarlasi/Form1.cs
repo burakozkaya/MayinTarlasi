@@ -70,15 +70,14 @@
             LabelSetter();
             if (count == 0)
             {
-                foreach (var item in buttons)
-                {
-                    item.Enabled = false;
-                }
+                ButtonEnableFalse();
                 timer1.Stop();
+                ShowBomb();
                 MessageBox.Show("Süreniz dolduğu için kaybettiniz!");
                 DialogRes();
             }
         }
+
         private void btnBaslat_Click(object sender, EventArgs e)
         {
             bool flag1, flag2;
@@ -126,7 +125,7 @@
         }
         private void btnYardım_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("1) Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\n2) Yeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\n3) Ayarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.Aynı ayarlarla oynamak için Restart butonuna basın.\n4) Ekrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\n5) Bu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.\n6)Oynu kazanmak için tüm mayınsız alanlara tıklamnız lazım\nİyi eğlenceler!\n© 2023 Burak.Ozky");
+            MessageBox.Show("1) Oynu başlatmak için önce mayın ve süre bilgisini girin ve başlat butonuna basın.\n2) Yeni ayarlarla oyun oynamak için yeni oyun butonuna tıklayın.\n3) Ayarları yapıp oynu başlattıktan sonra Restart butonu aktive olacaktır.Aynı ayarlarla oynamak için Restart butonuna basın.\n4) Ekrandaki butonlara tıklayınca bombaya denk gelmediyseniz butonun üzerinde bir numara belirecektir.\n5) Bu numara butonun etrafında kaç tane mayın olduğunu göstermektedir.\n6)Oynu kazanmak için tüm mayınsız alanlara tıklamanız lazım\nİyi eğlenceler!\n7)Sağ click ile tıklayarak bayrak ekleyebilirsiniz eğer eklediğiniz bayrak mayının üzerindeyse kalan bomba sayısı azalıcaktır.\n© 2023 Burak.Ozky");
         }
         //Bombaya tıklanmadığında çalışan metot
         private void NonBombClick(Button btn)
@@ -188,19 +187,21 @@
             timer1.Stop();
             timer2.Enabled = true;
             timer2.Start();
-            foreach (var item in buttons)
-            {
-                item.Text = "";
-                item.Enabled = false;
-            }
-            foreach (var item in dicBomb)
-            {
-                item.BackColor = Color.Red;
-            }
+            ButtonEnableFalse();
+            ShowBomb();
             MessageBox.Show("Bombaya tıklandı\nOynu kaybettiniz.");
 
             btnYardım.Focus();
         }
+
+        private void ShowBomb()
+        {
+            foreach (var item in dicBomb)
+            {
+                item.BackColor = Color.Red;
+            }
+        }
+
         // Oynu restart eden buton 
         private void RestartGame()
         {
@@ -324,6 +325,15 @@
             else
             {
                 Application.Exit();
+            }
+        }
+        private void ButtonEnableFalse()
+        {
+            foreach (var item in buttons)
+            {
+                if (item.Text == "🚩")
+                    item.Text = "";
+                item.Enabled = false;
             }
         }
         private void btnBaslat_KeyDown(object sender, KeyEventArgs e)
