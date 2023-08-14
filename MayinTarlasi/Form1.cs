@@ -17,7 +17,7 @@
         string tempName = "Mayın Tarlası";
 
         (int, int) temp;
-        int count, countTemp, tempBomb, count2 = 10, x, y;
+        int count, countTemp, tempBomb, count2 = 10, x, y, count3;
 
         Button[,] buttons = new Button[10, 10];
         private void Form1_Load(object sender, EventArgs e)
@@ -33,17 +33,36 @@
 
         private void BombCheck(object? sender, MouseEventArgs e)
         {
+
             timer1.Start();
             Button btn = sender as Button;
-            if (dicBomb.Contains(btn))
+            if (e.Button == MouseButtons.Left)
             {
-                EndGameLoss();
-            }
-            else
-            {
-                NonBombClick(btn);
+                if (dicBomb.Contains(btn))
+                {
+                    EndGameLoss();
+                }
+                else
+                {
+                    NonBombClick(btn);
 
+                }
             }
+            else if (e.Button == MouseButtons.Right)
+            {
+                if (btn.Text == "🚩")
+                {
+                    btn.Text = "";
+                    count3++;
+                }
+                else if (count3 != 0)
+                {
+                    btn.Text = "🚩";
+                    count3--;
+                }
+                label3.Text = count3.ToString();
+            }
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -176,6 +195,7 @@
             timer2.Start();
             foreach (var item in buttons)
             {
+                item.Text = "";
                 item.Enabled = false;
             }
             foreach (var item in dicBomb)
@@ -207,6 +227,8 @@
             count2 = 10;
             LabelSetter();
             BombMaker(tempBomb, temp);
+            count3 = tempBomb;
+            label4.Text = count3.ToString();
             btnRestart.Enabled = true;
         }
         //Form ayarlarını yapan metot
@@ -220,11 +242,12 @@
             btnYardım.TabIndex = 5;
             label1.Enabled = false;
             label2.Enabled = false;
+            label3.Enabled = false;
+            label4.Enabled = false;
             btnRestart.Enabled = false;
             this.Name = tempName;
             this.Text = tempName;
             this.Size = new Size(500, 345);
-            this.AutoSize = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
         //sürenin ayarlandığı method
@@ -278,7 +301,7 @@
                     };
                     x += 30;
                     this.Controls.Add(buttons[i, j]);
-                    buttons[i, j].MouseClick += BombCheck;
+                    buttons[i, j].MouseUp += BombCheck;
                 }
 
                 y += 30;
