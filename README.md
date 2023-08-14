@@ -7,13 +7,13 @@ Bu proje, C# programlama dili kullanılarak geliştirilmiş basit bir Mayın Tar
 Oyun, 10x10 boyutunda bir buton alanı oluşturur ve bu alana rastgele mayınlar yerleştirir. Kullanıcı belirlediği süre içinde tıkladığı alanlarda mayın olup olmadığını tahmin etmeye çalışır. Mayına tıklanırsa oyun kaybedilir, tüm mayın olmayan alanlara tıklanırsa oyun kazanılır.
 
 
-Mayın Tarlası Oyunu - Readme
+##Mayın Tarlası Oyunu - Readme
 Bu Readme dosyası, "Mayın Tarlası" adlı C# programının açıklamalarını içermektedir. Bu program, kullanıcının oynayabileceği basit bir mayın tarlası oyununu simüle eder.
 
-Oyun Açıklaması
+##Oyun Açıklaması
 "Mayın Tarlası" oyunu, bir oyun tahtası üzerinde gizli bombaların yerlerini tahmin ederek tüm bombasız alanları keşfetme amacını taşır. Oyuncu, tahtadaki her kareye tıklayarak ve tahmini bomba yerlerine bayrak koyarak oyunu oynar.
 
-Oyun Özellikleri
+##Oyun Özellikleri
 Oyun tahtası, belirli bir boyutta oluşturulur. Varsayılan olarak 10x10 boyutunda tahtalar oluşturulur.
 Kullanıcı, oyun başlamadan önce mayın sayısını ve süre sınırlamasını belirler.
 Mayınların konumları rastgele seçilir ve oyun başladığında oyuncu bu konumları tahmin etmeye çalışır.
@@ -22,7 +22,7 @@ Sağ tıklama ile bayrak konur. Bayrak, oyuncunun potansiyel bir bomba olduğunu
 Oyunda bir süre sınırlaması vardır. Süre dolduğunda oyun kaybedilir.
 Tüm bombasız kareler açıldığında oyuncu oyunu kazanır.
 
-Nasıl Kullanılır
+##Nasıl Kullanılır
 Oyunu başlatmak için "Mayın Sayısı" ve "Süre" alanlarına istenen değerleri girin.
 "Başlat" butonuna tıklayarak oyunu başlatın.
 Sol tıklama ile kareleri açarak ve sağ tıklama ile bayrak koyarak oyunu oynayın.
