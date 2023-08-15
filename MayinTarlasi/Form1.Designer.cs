@@ -52,10 +52,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(795, 91);
-            label1.Margin = new Padding(6, 0, 6, 0);
+            label1.Location = new Point(428, 43);
             label1.Name = "label1";
-            label1.Size = new Size(29, 36);
+            label1.Size = new Size(15, 17);
             label1.TabIndex = 0;
             label1.Text = "0";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -64,20 +63,18 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(648, 91);
-            label2.Margin = new Padding(6, 0, 6, 0);
+            label2.Location = new Point(349, 43);
             label2.Name = "label2";
-            label2.Size = new Size(142, 36);
+            label2.Size = new Size(73, 17);
             label2.TabIndex = 1;
             label2.Text = "Kalan Süre:";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnBaslat
             // 
-            btnBaslat.Location = new Point(648, 269);
-            btnBaslat.Margin = new Padding(6);
+            btnBaslat.Location = new Point(349, 126);
             btnBaslat.Name = "btnBaslat";
-            btnBaslat.Size = new Size(202, 85);
+            btnBaslat.Size = new Size(109, 40);
             btnBaslat.TabIndex = 2;
             btnBaslat.Text = "Başlat";
             btnBaslat.UseVisualStyleBackColor = true;
@@ -86,20 +83,18 @@
             // 
             // txtMayin
             // 
-            txtMayin.Location = new Point(648, 145);
-            txtMayin.Margin = new Padding(6);
+            txtMayin.Location = new Point(349, 68);
             txtMayin.Name = "txtMayin";
             txtMayin.PlaceholderText = "Mayın sayısını girin";
-            txtMayin.Size = new Size(199, 39);
+            txtMayin.Size = new Size(109, 23);
             txtMayin.TabIndex = 3;
             // 
             // txtSure
             // 
-            txtSure.Location = new Point(648, 207);
-            txtSure.Margin = new Padding(6);
+            txtSure.Location = new Point(349, 97);
             txtSure.Name = "txtSure";
             txtSure.PlaceholderText = "Süre bilgisini girin";
-            txtSure.Size = new Size(199, 39);
+            txtSure.Size = new Size(109, 23);
             txtSure.TabIndex = 4;
             // 
             // timer2
@@ -109,10 +104,9 @@
             // 
             // btnYeni
             // 
-            btnYeni.Location = new Point(648, 367);
-            btnYeni.Margin = new Padding(6);
+            btnYeni.Location = new Point(349, 172);
             btnYeni.Name = "btnYeni";
-            btnYeni.Size = new Size(202, 85);
+            btnYeni.Size = new Size(109, 40);
             btnYeni.TabIndex = 5;
             btnYeni.Text = "Yeni Oyun";
             btnYeni.UseVisualStyleBackColor = true;
@@ -121,10 +115,9 @@
             // 
             // btnRestart
             // 
-            btnRestart.Location = new Point(648, 465);
-            btnRestart.Margin = new Padding(6);
+            btnRestart.Location = new Point(349, 218);
             btnRestart.Name = "btnRestart";
-            btnRestart.Size = new Size(202, 85);
+            btnRestart.Size = new Size(109, 40);
             btnRestart.TabIndex = 6;
             btnRestart.Text = "Restart";
             btnRestart.UseVisualStyleBackColor = true;
@@ -133,10 +126,9 @@
             // 
             // btnYardım
             // 
-            btnYardım.Location = new Point(648, 563);
-            btnYardım.Margin = new Padding(6);
+            btnYardım.Location = new Point(349, 264);
             btnYardım.Name = "btnYardım";
-            btnYardım.Size = new Size(202, 85);
+            btnYardım.Size = new Size(109, 40);
             btnYardım.TabIndex = 7;
             btnYardım.Text = "Yardım";
             btnYardım.UseVisualStyleBackColor = true;
@@ -146,25 +138,27 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(813, 35);
+            label3.Location = new Point(439, 16);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(0, 32);
+            label3.Size = new Size(0, 15);
             label3.TabIndex = 8;
             // 
             // label4
             // 
-            label4.Location = new Point(648, 35);
+            label4.Location = new Point(349, 16);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(159, 40);
+            label4.Size = new Size(86, 19);
             label4.TabIndex = 9;
             label4.Text = "Kalan bomba:";
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(866, 663);
+            ClientSize = new Size(466, 311);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(btnYardım);
@@ -175,7 +169,6 @@
             Controls.Add(btnBaslat);
             Controls.Add(label2);
             Controls.Add(label1);
-            Margin = new Padding(6);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
