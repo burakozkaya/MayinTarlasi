@@ -31,15 +31,6 @@ Tüm bombasız kareleri açarak oyunu kazanın.
 "Yeni Oyun" butonu ile yeni bir oyun başlatabilirsiniz.
 "Yardım" butonu ile oyun kurallarını görüntüleyebilirsiniz.
 
-## Ekran Görüntüleri
-![image](https://github.com/burakozkaya/MayinTarlasi/assets/90522490/88e4fe57-41a6-43ae-b008-4d173039e122)
-![image](https://github.com/burakozkaya/MayinTarlasi/assets/90522490/8f04e262-e9f0-4ca4-9509-1b40d5cbfcef)
-![image](https://github.com/burakozkaya/MayinTarlasi/assets/90522490/28391ed1-8810-4d9c-85e4-b711e8c3d383)
-![image](https://github.com/burakozkaya/MayinTarlasi/assets/90522490/51404863-dc4f-4e32-8d1e-c0edfd10762a)
-
-
-
-
 ## Nasıl Kurulur?
 
 Projeyi klonlayın ve Visual Studio gibi bir C# derleyicisiyle açarak çalıştırabilirsiniz.
