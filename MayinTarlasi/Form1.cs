@@ -33,7 +33,7 @@
         {
             timer1.Start();
             Button btn = sender as Button;
-            if (e.Button == MouseButtons.Left && btn.Text!= "🚩")
+            if (e.Button == MouseButtons.Left && btn.Text != "🚩")
             {
                 if (dicBomb.Contains(btn))
                 {
@@ -74,7 +74,8 @@
                 timer1.Stop();
                 ShowBomb();
                 MessageBox.Show("Süreniz dolduğu için kaybettiniz!");
-                DialogRes();
+                timer2.Enabled = true;
+                timer2.Start();
             }
         }
 
